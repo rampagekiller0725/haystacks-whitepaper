@@ -107,46 +107,51 @@
 					</a>
 					<div class="hr pd4"></div>
 					<h3 class="center">Input form</h3>
-					<form class="form" onsubmit="return submitForm(this);">
+					<form class="form">
 						<div class="flex">
 							<div class="column_input">
 								<input
 									type="text"
 									placeholder="Name"
-									name="name"
+									id="name"
 									class="input col-6"
+									required
 								/>
 								<input
 									type="text"
 									placeholder="Phone"
-									name="phone"
+									id="phone"
 									class="input col-6"
 								/>
 								<input
 									type="text"
 									placeholder="Email"
-									name="email"
+									id="email"
 									class="input col-6"
+									required
 								/>
 							</div>
 							<div class="column_input">
 								<input
 									type="text"
 									placeholder="Job Title"
-									name="job_title"
+									id="job_title"
 									class="input col-6"
+									required
 								/>
 								<input
 									type="text"
 									placeholder="Business Name"
-									name="business_name"
+									id="business_name"
 									class="input col-6"
+									required
 								/>
 								<input
 									type="text"
 									placeholder="Business URL"
-									name="business_url"
+									id="business_url"
 									class="input col-6"
+									required
 								/>
 							</div>
 						</div>
@@ -201,4 +206,36 @@
 			</section>
 		</main>
 	</body>
+	<script type="text/javascript">
+		const form = document.getElementsByClassName("form")[0];
+		form.addEventListener("submit", async function(event){
+			event.preventDefault();
+
+			const name = document.getElementById("name").value;
+			const email = document.getElementById("email").value;
+			const phone = document.getElementById("phone").value;
+			const job_title = document.getElementById("job_title").value;
+			const business_name = document.getElementById("business_name").value;
+			const business_url = document.getElementById("business_url").value;
+
+			const serverUrl = "https://haystacksbackend.onrender.com/email"
+			const res = await fetch(serverUrl, {
+				method: "POST",
+				mode: "cors",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name: name,
+					email: email,
+					phone: phone,
+					job_title: job_title,
+					business_name: business_name,
+					business_url: business_url,
+					whitePaperNo: 1,
+				}),
+			});
+		})
+		
+	</script>
 </html>
