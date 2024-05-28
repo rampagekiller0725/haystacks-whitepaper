@@ -28,6 +28,7 @@
 		<meta name="yandexbot" content="index, follow" />
 		<meta name="facebookbot" content="index, follow" />
 		<meta name="twitterbot" content="index, follow" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="src/optimized.css" />
 	</head>
 	<body>
@@ -156,7 +157,7 @@
 							</div>
 						</div>
 
-						<button type="submit" class="col-12 button">
+						<button type="submit" id="submit-btn" class="col-12 buttonload button">
 							Submit
 						</button>
 					</form>
@@ -218,10 +219,14 @@
 			const business_name = document.getElementById("business_name").value;
 			const business_url = document.getElementById("business_url").value;
 
-			const serverUrl = "https://haystacksbackend.onrender.com/email"
+			const submitBtn = document.getElementById("submit-btn");
+
+			submitBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i> Submitting';
+			submitBtn.disabled = true;
+
+			const serverUrl = "https://haystacks-backend.vercel.app/email"
 			const res = await fetch(serverUrl, {
 				method: "POST",
-				mode: "cors",
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -232,9 +237,20 @@
 					job_title: job_title,
 					business_name: business_name,
 					business_url: business_url,
-					whitePaperNo: 1,
+					whitePaperNo: 0,
 				}),
 			});
+
+			const result = await res.json();
+			console.log(result)
+
+			if (!result.error) {
+				// window.location.href = res.url;
+				window.open(result.url, "_blank");
+			}
+
+			submitBtn.innerHTML = "Submit";
+			submitBtn.disabled = false;
 		})
 		
 	</script>
