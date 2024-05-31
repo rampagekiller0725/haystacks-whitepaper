@@ -249,6 +249,10 @@
 				window.open(result.url, "_blank");
 			}
 
+			if (result.alreadySigned) {
+				alert("You've already signed in this white paper")
+			}
+
 			submitBtn.innerHTML = "Submit";
 			submitBtn.disabled = false;
 		})
