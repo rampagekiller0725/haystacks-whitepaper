@@ -28,7 +28,10 @@
 		<meta name="yandexbot" content="index, follow" />
 		<meta name="facebookbot" content="index, follow" />
 		<meta name="twitterbot" content="index, follow" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
 		<link rel="stylesheet" type="text/css" href="src/optimized.css" />
 	</head>
 	<body>
@@ -36,7 +39,7 @@
 			<div class="header"></div>
 			<section class="blue">
 				<div class="container">
-					<h3>Testing Automation Framework Vision</h3>
+					<h3>Testing Automation Framework Overview</h3>
 					<p>
 						Author and repair broken test scripts faster with
 						Haystacks-Tech's tools and framework. You own the tech &
@@ -44,7 +47,8 @@
 						appointment with the link below and see how the
 						Haystacks Tech team can help you. But only if you
 						actually want to disrupt the status-quo of quality
-						assurance.
+						assurance. Fill out your details below to download the
+						white paper.
 					</p>
 					<div class="half hr"></div>
 					<h3>Watch this brief video for what to do next. 👇</h3>
@@ -97,11 +101,11 @@
 					<div class="hr pd4"></div>
 					<h3 class="center">White Paper</h3>
 
-						<img
-							src="./src/white.webp"
-							class="largeImg"
-							alt="White Paper"
-						/>
+					<img
+						src="./src/white.webp"
+						class="largeImg"
+						alt="White Paper"
+					/>
 
 					<div class="hr pd4"></div>
 					<h3 class="center">Input form</h3>
@@ -154,7 +158,11 @@
 							</div>
 						</div>
 
-						<button type="submit" id="submit-btn" class="col-12 buttonload button">
+						<button
+							type="submit"
+							id="submit-btn"
+							class="col-12 buttonload button"
+						>
 							Submit
 						</button>
 					</form>
@@ -206,22 +214,24 @@
 	</body>
 	<script type="text/javascript">
 		const form = document.getElementsByClassName("form")[0];
-		form.addEventListener("submit", async function(event){
+		form.addEventListener("submit", async function (event) {
 			event.preventDefault();
 
 			const name = document.getElementById("name").value;
 			const email = document.getElementById("email").value;
 			const phone = document.getElementById("phone").value;
 			const job_title = document.getElementById("job_title").value;
-			const business_name = document.getElementById("business_name").value;
+			const business_name =
+				document.getElementById("business_name").value;
 			const business_url = document.getElementById("business_url").value;
 
 			const submitBtn = document.getElementById("submit-btn");
 
-			submitBtn.innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i> Submitting';
+			submitBtn.innerHTML =
+				'<i class="fa fa-circle-o-notch fa-spin"></i> Submitting';
 			submitBtn.disabled = true;
 
-			const serverUrl = "https://haystacks-backend.vercel.app/email"
+			const serverUrl = "https://haystacks-backend.vercel.app/email";
 			const res = await fetch(serverUrl, {
 				method: "POST",
 				headers: {
@@ -239,7 +249,7 @@
 			});
 
 			const result = await res.json();
-			console.log(result)
+			console.log(result);
 
 			if (!result.error) {
 				// window.location.href = res.url;
@@ -247,12 +257,11 @@
 			}
 
 			if (result.alreadySigned) {
-				alert("You've already signed in this white paper")
+				alert("You've already signed in this white paper");
 			}
 
 			submitBtn.innerHTML = "Submit";
 			submitBtn.disabled = false;
-		})
-		
+		});
 	</script>
 </html>
